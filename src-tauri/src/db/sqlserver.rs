@@ -27,7 +27,7 @@ pub async fn connect(connection: &Connection, password: Option<&str>) -> Result<
             return Err("Username is required for SQL authentication".to_string());
         }
     } else {
-        // Windows authentication - use integrated security
+        // Windows authentication - use integrated security via SSPI
         #[cfg(windows)]
         {
             config.authentication(AuthMethod::Integrated);
