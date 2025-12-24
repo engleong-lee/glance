@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+/* Custom styles for Glance app */
+
+/* ============================================
+   THEME CSS VARIABLES
+   ============================================ */
+
+/* Light Theme (default) */
+:root,
+.light {
+  /* Base colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f9fafb;
+  --color-bg-tertiary: #f3f4f6;
+
+  /* Text colors */
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-tertiary: #9ca3af;
+  --color-text-muted: #d1d5db;
+
+  /* Border colors */
+  --color-border-default: #e5e7eb;
+  --color-border-subtle: #f3f4f6;
+
+  /* Accent colors */
+  --color-accent-primary: #3b82f6;
+  --color-accent-primary-hover: #2563eb;
+  --color-accent-secondary: #eff6ff;
+
+  /* Status colors */
+  --color-success: #10b981;
+  --color-success-bg: #ecfdf5;
+  --color-error: #ef4444;
+  --color-error-bg: #fef2f2;
+  --color-warning: #f59e0b;
+  --color-warning-bg: #fffbeb;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Focus ring */
+  --color-focus-ring: rgba(59, 130, 246, 0.3);
+
+  /* Match highlighting */
+  --color-match-bg: #fef08a;
+  --color-match-text: inherit;
+
+  /* Scrollbar */
+  --color-scrollbar: rgba(156, 163, 175, 0.5);
+  --color-scrollbar-hover: rgba(156, 163, 175, 0.7);
+
+  color-scheme: light;
+}
+
+/* Dark Theme */
+.dark {
+  /* Base colors */
+  --color-bg-primary: #111827;
+  --color-bg-secondary: #1f2937;
+  --color-bg-tertiary: #374151;
+
+  /* Text colors */
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-text-tertiary: #9ca3af;
+  --color-text-muted: #6b7280;
+
+  /* Border colors */
+  --color-border-default: #374151;
+  --color-border-subtle: #1f2937;
+
+  /* Accent colors */
+  --color-accent-primary: #60a5fa;
+  --color-accent-primary-hover: #3b82f6;
+  --color-accent-secondary: rgba(59, 130, 246, 0.2);
+
+  /* Status colors */
+  --color-success: #34d399;
+  --color-success-bg: rgba(16, 185, 129, 0.2);
+  --color-error: #f87171;
+  --color-error-bg: rgba(239, 68, 68, 0.2);
+  --color-warning: #fbbf24;
+  --color-warning-bg: rgba(245, 158, 11, 0.2);
+
+  /* Shadows - darker for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+
+  /* Focus ring */
+  --color-focus-ring: rgba(96, 165, 250, 0.4);
+
+  /* Match highlighting */
+  --color-match-bg: #854d0e;
+  --color-match-text: #fef9c3;
+
+  /* Scrollbar */
+  --color-scrollbar: rgba(107, 114, 128, 0.5);
+  --color-scrollbar-hover: rgba(107, 114, 128, 0.7);
+
+  color-scheme: dark;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Even smaller for denser views */
+.compact {
+  font-size: 12px;
+}
+
+/* System preference fallback */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    /* Apply dark theme variables when no class is set and system prefers dark */
+    --color-bg-primary: #111827;
+    --color-bg-secondary: #1f2937;
+    --color-bg-tertiary: #374151;
+    --color-text-primary: #f9fafb;
+    --color-text-secondary: #d1d5db;
+    --color-text-tertiary: #9ca3af;
+    --color-text-muted: #6b7280;
+    --color-border-default: #374151;
+    --color-border-subtle: #1f2937;
+    --color-accent-primary: #60a5fa;
+    --color-accent-primary-hover: #3b82f6;
+    --color-accent-secondary: rgba(59, 130, 246, 0.2);
+    --color-success: #34d399;
+    --color-success-bg: rgba(16, 185, 129, 0.2);
+    --color-error: #f87171;
+    --color-error-bg: rgba(239, 68, 68, 0.2);
+    --color-warning: #fbbf24;
+    --color-warning-bg: rgba(245, 158, 11, 0.2);
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    --color-focus-ring: rgba(96, 165, 250, 0.4);
+    --color-match-bg: #854d0e;
+    --color-match-text: #fef9c3;
+    --color-scrollbar: rgba(107, 114, 128, 0.5);
+    --color-scrollbar-hover: rgba(107, 114, 128, 0.7);
+    color-scheme: dark;
+  }
+}
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+/* Search bar focus effect */
+.search-bar input:focus {
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* Result item hover animation */
+.result-item {
+  transition: all 0.15s ease;
+}
+
+.result-item:hover {
+  transform: translateX(4px);
+}
+
+/* Scrollbar styling */
+.results-list::-webkit-scrollbar,
+.preview-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.results-list::-webkit-scrollbar-track,
+.preview-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.results-list::-webkit-scrollbar-thumb,
+.preview-panel::-webkit-scrollbar-thumb {
+  background-color: var(--color-scrollbar);
+  border-radius: 4px;
+}
+
+.results-list::-webkit-scrollbar-thumb:hover,
+.preview-panel::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-scrollbar-hover);
+}
+
+/* Match highlighting */
+mark {
+  background-color: var(--color-match-bg);
+  color: var(--color-match-text);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* Toast animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.toast-enter {
+  animation: slideIn 0.3s ease;
+}
+
+.toast-exit {
+  animation: fadeOut 0.2s ease forwards;
+}
+
+/* Connection form styling */
+.connection-form input:focus,
+.connection-form select:focus {
+  outline: none;
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* Keyboard shortcut hints */
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+}
+
+/* ============================================
+   LAYOUT STYLES
+   ============================================ */
+
+/* App layout - fixed header and footer */
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.app>header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.app>footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 50;
+  background-color: var(--color-bg-primary);
+  border-top: 1px solid var(--color-border-default);
+}
+
+/* Main content area scrolls independently */
+.app>div {
+  flex: 1;
+  overflow: hidden;
+}
+
+.app main {
+  overflow-y: auto;
+}
+
+/* ============================================
+   MODAL STYLES
+   ============================================ */
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dark .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Text selection */
+::selection {
+  background-color: var(--color-accent-primary);
+  color: white;
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+/* Exception for animations that shouldn't have theme transition */
+.result-item,
+.toast-enter,
+button {
+  transition-property: all;
+}
